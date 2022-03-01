@@ -6,10 +6,9 @@ public class BattleManager : MonoBehaviour
 {
     void Start()
     {
-        Application.targetFrameRate = 60;
         ECSManager.Instance.CreatePlayer();
         ECSManager.Instance.CreateEnemy();
-        ECSManager.Instance.CreateSpec();
+        Application.targetFrameRate = 60;
     }
 
     public void CreateEntitis()
