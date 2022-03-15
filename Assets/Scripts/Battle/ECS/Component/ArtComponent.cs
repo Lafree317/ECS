@@ -9,13 +9,11 @@ namespace ECS
         public Transform transform;
         public GameObject go;
         public SpriteRenderer sprite;
-        public static void AddComponent(BaseEntity entity,string prefabPath)
+        public static void AddComponent(Entity entity,string prefabPath)
         {
             entity.art = new ArtComponent();
             entity.art.prefabPath = prefabPath;
             entity.art.LoadPrefab();
-            
-
         }
 
         public void LoadPrefab()
@@ -23,8 +21,6 @@ namespace ECS
             go = GameObject.Instantiate(Resources.Load<GameObject>(prefabPath));
             transform = go.transform;
             sprite = go.transform.GetChild(0).GetComponent<SpriteRenderer>();
-            
-            
         }
 
         public void ChangeColor()

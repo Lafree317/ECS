@@ -5,12 +5,12 @@ namespace ECS
 {
     public class MoveComponent:BaseComponent 
     {
-        public float speedX;
-        public float speedY;
+        public float speedX = 0;
+        public float speedY = 0;
         public float moveX = 0;
         public float moveY = 0;
 
-        public static void AddComponent(BaseEntity entity)
+        public static void AddComponent(Entity entity)
         {
             MoveComponent move  = new MoveComponent();
             move.speedX = 1f;

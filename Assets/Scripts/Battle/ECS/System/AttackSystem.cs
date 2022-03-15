@@ -5,29 +5,16 @@ namespace ECS
 {
     public class AttackSystem:BaseSystem
     {
-        public BaseEntity target
-        {
-            get
-            {
-                return ECSManager.Instance.enemy;
-            }
-        }
-
         public override void Update() 
         {
             for (int i = 0; i < ECSManager.Instance.allEntitis.Count; i++)
             {
-                BaseEntity entity = ECSManager.Instance.allEntitis[i];
+                Entity entity = ECSManager.Instance.allEntitis[i];
                 if(entity.attack == null) continue;
-                if(entity.attack.isShooting)
+                if(entity.attack.isAttack)
                 {
-                    ECSManager.Instance.CreateBullet(entity.art.transform,target.art.transform);
-                    entity.attack.isShooting = false;
-                }
-                else if(entity.attack.isCopy)
-                {
-                    ECSManager.Instance.CreateSpec();
-                    entity.attack.isCopy = false;
+                    ECSManager.Instance.CreateBullet(entity.art.transform,entity.attack.targetPosition);
+                    entity.attack.isAttack = false;
                 }
                 
             }

@@ -1,48 +1,66 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Controls;
+
 namespace ECS
 {
-    public class ControlSystem:BaseSystem
+    public class ControlSystem:MonoBehaviour
     {
-        // public Entity player;
-        public ControlSystem()
+        public PlayerInput playerInput;
+        public Vector2Control recordMouse;
+        void Update()
         {
-            // player = ECSManager.Instance.player;
+            recordMouse = Mouse.current.position;
         }
 
-        public override void Update()
+        public void Start()
         {
+            InputAction move = playerInput.currentActionMap.FindAction("Move");
+            move.performed += OnMove;
+            move.canceled += OnMove;
+            InputAction fire = playerInput.currentActionMap.FindAction("Fire");
+            fire.performed += OnFire;
+            InputAction hold = playerInput.currentActionMap.FindAction("Hold");
+            hold.performed += OnHold;
+            hold.canceled += OnHold;
+        }
+        
+        public void OnMove(InputAction.CallbackContext context)
+        {
+            Vector2 v = context.ReadValue<Vector2>();
             for (int i = 0; i < ECSManager.Instance.allEntitis.Count; i++)
             {
-                BaseEntity entity = ECSManager.Instance.allEntitis[i];
+                Entity entity = ECSManager.Instance.allEntitis[i];
                 if(entity.control == null) continue;
-
-                if (Input.GetKey(KeyCode.W))
-                {
-                    entity.move.moveY = 1;
-                }
-
-                if (Input.GetKey(KeyCode.S))
-                {
-                    entity.move.moveY = -1;
-                }
-
-                if (Input.GetKey(KeyCode.A))
-                {
-                    entity.move.moveX = -1;
-                }
-
-                if (Input.GetKey(KeyCode.D))
-                {
-                    entity.move.moveX = 1;
-                }
-
-                entity.attack.isShooting = Input.GetKeyDown(KeyCode.Space);
-                entity.attack.isCopy = Input.GetKeyDown(KeyCode.LeftControl);
-
+                entity.move.moveX = v.x;
+                entity.move.moveY = v.y;
             }
+        }
 
+        public void OnFire(InputAction.CallbackContext context)
+        {
+            Debug.Log("攻击");
+            for (int i = 0; i < ECSManager.Instance.allEntitis.Count; i++)
+            {
+                Entity entity = ECSManager.Instance.allEntitis[i];
+                if(entity.control == null) continue;
+                entity.attack.isAttack = true;
+                entity.attack.targetPosition = recordMouse.ReadValue();
+            }
+        }
+
+        public void OnHold(InputAction.CallbackContext context)
+        {
+            if(context.phase == InputActionPhase.Canceled)
+            {
+                Debug.Log("长按结束了");
+            }
+            if(context.phase == InputActionPhase.Performed)
+            {
+                Debug.Log("长按");
+            }
         }
     }
 }

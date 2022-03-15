@@ -7,8 +7,8 @@ namespace ECS
         public float lifeTime;
         public float speed = 0.5f;
         
-        public Transform target;
-        public static void AddComponent(BaseEntity entity)
+        public Vector3 targetPosition;
+        public static void AddComponent(Entity entity)
         {
             entity.bullet = new BulletComponent();
             

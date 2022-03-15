@@ -5,10 +5,9 @@ namespace ECS
 {
     public class AttackComponent:BaseComponent 
     {
-        public bool isShooting = false;
-        public bool isCopy = false;
-        
-        public static void AddComponent(BaseEntity entity)
+        public bool isAttack = false;
+        public Vector2 targetPosition;
+        public static void AddComponent(Entity entity)
         {
             entity.attack = new AttackComponent();
             
