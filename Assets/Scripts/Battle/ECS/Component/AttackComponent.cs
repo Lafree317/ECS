@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ECS
 {
+    [System.Serializable]
     public class AttackComponent:BaseComponent 
     {
         public bool isAttack = false;
@@ -10,7 +11,6 @@ namespace ECS
         public static void AddComponent(Entity entity)
         {
             entity.attack = new AttackComponent();
-            
         }
 
         

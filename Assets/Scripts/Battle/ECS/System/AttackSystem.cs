@@ -16,7 +16,6 @@ namespace ECS
                     ECSManager.Instance.CreateBullet(entity.art.transform,entity.attack.targetPosition);
                     entity.attack.isAttack = false;
                 }
-                
             }
         }
     }

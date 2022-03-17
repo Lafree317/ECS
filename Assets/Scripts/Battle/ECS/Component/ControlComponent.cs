@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 namespace ECS
 {
+    [System.Serializable]
     public class ControlComponent:BaseComponent 
     {
         public static void AddComponent(Entity entity)

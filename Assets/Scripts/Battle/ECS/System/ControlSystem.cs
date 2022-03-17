@@ -41,7 +41,6 @@ namespace ECS
 
         public void OnFire(InputAction.CallbackContext context)
         {
-            Debug.Log("攻击");
             for (int i = 0; i < ECSManager.Instance.allEntitis.Count; i++)
             {
                 Entity entity = ECSManager.Instance.allEntitis[i];
@@ -55,11 +54,11 @@ namespace ECS
         {
             if(context.phase == InputActionPhase.Canceled)
             {
-                Debug.Log("长按结束了");
+       
             }
             if(context.phase == InputActionPhase.Performed)
             {
-                Debug.Log("长按");
+               
             }
         }
     }

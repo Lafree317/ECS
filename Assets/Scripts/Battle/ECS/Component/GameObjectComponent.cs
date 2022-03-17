@@ -19,7 +19,6 @@ namespace ECS
             {
                 ECSManager.Instance.DesrotyEntity(entity);
                 GameObjectComponent gameObjectComponent = other.gameObject.GetComponent<GameObjectComponent>();
-                gameObjectComponent.entity.art.ChangeColor();
             }
         }
 

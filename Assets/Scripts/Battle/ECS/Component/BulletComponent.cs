@@ -2,6 +2,7 @@ using UnityEngine;
 
 namespace ECS
 {
+    [System.Serializable]
     public class BulletComponent:BaseComponent
     {
         public float lifeTime;
@@ -11,7 +12,6 @@ namespace ECS
         public static void AddComponent(Entity entity)
         {
             entity.bullet = new BulletComponent();
-            
         }
     }
 }

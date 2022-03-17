@@ -13,6 +13,7 @@ namespace ECS
 
         private AttackSystem attack;
         private BulletSystem bullet;
+        private EntityCreate create;
         
         void Start()
         {
@@ -30,30 +31,15 @@ namespace ECS
 
         public void CreatePlayer()
         {
-            Entity player = Entity.CreateCharacter("Prefab/Player");
-            ControlComponent.AddComponent(player);
-            player.art.transform.localPosition = new Vector3(-3,0,0);
+            Entity player = EntityCreate.Instance.CreateCharacter();
+            
+            player.art.transform.localPosition = new Vector3(0,0,0);
             allEntitis.Add(player);
-        }
-
-        public void CreateSpec()
-        {
-            Entity entiy = Entity.CreateCharacter("Prefab/Player");
-            ControlComponent.AddComponent(entiy);
-            entiy.art.transform.localPosition = new Vector3(Random.Range(-3,3),Random.Range(-3,3),0);
-            allEntitis.Add(entiy);
-        }
-
-        public void CreateEnemy()
-        {
-            enemy = Entity.CreateCharacter("Prefab/Enemy");
-            enemy.art.transform.localPosition = new Vector3(4,0,0);
-            allEntitis.Add(enemy);
         }
 
         public void CreateBullet(Transform selfTran,Vector3 targetPosition)
         {
-            Entity bullet = Entity.CreateBullet(selfTran,targetPosition);
+            Entity bullet = EntityCreate.Instance.CreateBullet(selfTran,targetPosition);
             allEntitis.Add(bullet);
         }
         
