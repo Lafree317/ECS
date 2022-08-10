@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ECS
 {
-    [System.Serializable]
     public class MoveComponent:BaseComponent 
     {
         public float speedX = 0;

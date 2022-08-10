@@ -4,7 +4,6 @@ using UnityEngine;
 using XYFramework;
 namespace ECS
 {
-    [System.Serializable]
     public class ArtComponent:BaseComponent 
     {
         public string prefabPath;

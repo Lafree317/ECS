@@ -22,11 +22,7 @@ namespace ECS
         {
             Transform trans =  bulletPool.Spawn(bullet);
             bulletPool.Despawn(trans,3.0f);
-            Entity entity = new Entity();
-            ArtComponent.AddComponent(entity,trans.gameObject);
-            BulletComponent.AddComponent(entity);
-            MoveComponent.AddComponent(entity);
-            
+            Entity entity = trans.GetComponent<GameObjectComponent>().entity;
             entity.art.transform.position = selfTran.position;
             entity.bullet.targetPosition = targetPosition;
             entity.move.speedY = 3.0f;
@@ -57,19 +53,26 @@ namespace ECS
 
         void InitBulletPool()
         {
+            bullet = GameObject.Instantiate(bullet);
+            Entity entity = new Entity();
+            ArtComponent.AddComponent(entity,bullet.gameObject);
+            BulletComponent.AddComponent(entity);
+            MoveComponent.AddComponent(entity);
+            GameObjectComponent.AddComponent(entity);
+            
             bulletPool = PoolManager.Pools.Create(Pool_Bullet_Key);
             PrefabPool prefabPool = new PrefabPool(bullet);
-            prefabPool.cullDespawned = true;
-            prefabPool.preloadAmount = 100;
+
             bulletPool.CreatePrefabPool(prefabPool);
+        
         }
 
         void InitCharacterPool()
         {
+
+
             characterPool = PoolManager.Pools.Create(Pool_Character_Key);
             PrefabPool prefabPool = new PrefabPool(character);
-            prefabPool.cullDespawned = true;
-            prefabPool.preloadAmount = 100;
             characterPool.CreatePrefabPool(prefabPool);
         }
     }

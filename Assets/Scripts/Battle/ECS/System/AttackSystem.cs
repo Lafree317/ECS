@@ -14,7 +14,12 @@ namespace ECS
                 if(entity.attack.isAttack)
                 {
                     ECSManager.Instance.CreateBullet(entity.art.transform,entity.attack.targetPosition);
+                    
                     entity.attack.isAttack = false;
+
+                    RayReflect.Instance.p1 = new Vector2(entity.art.transform.position.x,entity.art.transform.position.y);
+                    RayReflect.Instance.p2 = entity.attack.targetPosition;
+         
                 }
             }
         }

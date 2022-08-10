@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 namespace ECS
 {
-    [System.Serializable]
     public class AttackComponent:BaseComponent 
     {
         public bool isAttack = false;

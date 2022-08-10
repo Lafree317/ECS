@@ -5,11 +5,11 @@ using UnityEngine.InputSystem;
 
 namespace ECS
 {
-    [System.Serializable]
     public class ControlComponent:BaseComponent 
     {
         public static void AddComponent(Entity entity)
         {
+            Debug.Log("111111");
             entity.control = new ControlComponent();
         }
 
